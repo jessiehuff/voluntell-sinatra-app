@@ -2,17 +2,32 @@ class CausesController < ApplicationController
 
   # GET: /causes
   get "/causes" do
-    erb :"/causes/index.html"
+    if logged_in? 
+      @causes = Cause.all 
+      erb :"/causes/index.html"
+    else 
+      redirect '/login'
+    end
   end
 
   # GET: /causes/new
   get "/causes/new" do
-    erb :"/causes/new.html"
+    if logged_in? 
+      erb :"/causes/new.html"
+    else 
+      redirect '/login'
+    end
   end
 
   # POST: /causes
   post "/causes" do
-    redirect "/causes"
+    if !params.value?("") 
+      @cause = Cause.new(params)
+      current_user.causes << @cause 
+      redirect "/causes"
+    else 
+      redirect '/causes/new' 
+    end
   end
 
   # GET: /causes/5
