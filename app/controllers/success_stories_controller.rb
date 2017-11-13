@@ -62,13 +62,17 @@ post "/success_stories/:id" do
 end
 
 # DELETE: /success_stories/5/delete
-delete "/success_stories/:id/delete" do
-  @success_story = SuccessStory.find_by_id(params[:id])
-  if @success_story && @success_story.volunteer == current_user
-    @success_story.delete
-    redirect "/success_stories"
+get "/success_stories/:id/delete" do
+  if logged_in?
+    @success_story = SuccessStory.find_by_id(params[:id])
+    if @success_story && (@success_story.volunteer == current_user)
+      @success_story.delete
+      redirect "/success_stories"
+    else
+      redirect "/success_stories/#{@success_story.id}"
+    end
   else
-    redirect '/success_stories'
+    redirect '/login'
   end
 end
 end

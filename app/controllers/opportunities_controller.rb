@@ -61,7 +61,7 @@ class OpportunitiesController < ApplicationController
     end
   end
 
-  # DELETE: /opportunities/5/delete        fixed?
+  # DELETE: /opportunities/5/delete        fixed!
   get "/opportunities/:id/delete" do
     if logged_in?
       @opportunity = Opportunity.find_by_id(params[:id])
