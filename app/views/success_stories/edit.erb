@@ -1,0 +1,14 @@
+<h1>Edit Story</h1>
+<br><br>
+<form action="/success_stories/<%=@success_story.id%>" method="post">
+  <label for="content">Content:</label>
+  <input type="text" name="content" id="content" value="<%=@success_story.content%>">
+  <br><br>
+  <input type="submit" id="submit" value="submit">
+</form>
+<br>
+<form action="/success_stories/<%=@success_story.id%>/delete" method="get"
+<input type="submit" id="submit" value="Delete Story">
+</form>
+<br><br><br>
+<a href='/logout'>Log Out</a>
