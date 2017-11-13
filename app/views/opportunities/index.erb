@@ -5,6 +5,11 @@
   <p><a href="/opportunities/<%=opportunity.id%>"><%=opportunity.event%></a> <%= opportunity.date%></p>
   <p><%=opportunity.description%></p><br>
 <% end %>
+<br>
+<form action="search", method="get">
+<input type="text" name="search">
+</form>
+
 <h3><a href="/opportunities/new">Make a new Opportunity</a></h3>
 <br>
 <h3><a href="/success_stories">Check out everyone's volunteering stories!</a></h3>
