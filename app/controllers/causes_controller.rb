@@ -1,6 +1,6 @@
 class CausesController < ApplicationController
 
-  # GET: /causes
+  # GET: /causes      *allow to view all causes
   get "/causes" do
     if logged_in?
       @causes = Cause.all
@@ -11,9 +11,14 @@ class CausesController < ApplicationController
   end
 
 
-  # GET: /causes/5
+  # GET: /causes/5        *allow to view a specific cause
   get "/causes/:id" do
-    erb :"/causes/show.html"
+    if logged_in?
+      @cause = Cause.find_by_id(params[:id])
+      erb :"/causes/show.html"
+    else
+      redirect '/login'
+    end
   end
 
 end
