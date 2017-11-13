@@ -1,0 +1,21 @@
+<h1>Edit Opportunity</h1>
+<form action="/opportunities/<%=@opportunity.id%>" method="post">
+  <label for="event">Name:</label>
+  <input type="text" name="event" id="event" value="<%=@opportunity.event%>">
+  <br>
+  <label for="date">Date:</label>
+  <input type="text" name="date" id="date" value="<%=@opportunity.date%>">
+  <br>
+  <label for="time">Time:</label>
+  <input type="text" name="time" id="time" value="<%=@opportunity.time%>">
+  <br>
+  <label for="description">Description:</label>
+  <input type="text" name="description" id="description" value="<%=@opportunity.description%>">
+  <input type="submit" id="submit" value="submit">
+</form>
+<br>
+<form action="/opportunities/<%=@opportunity.id%>/delete" method="get"
+<input type="submit" id="submit" value="Delete Opportunity">
+</form>
+<br><br><br>
+<a href='/logout'>Log Out</a>
