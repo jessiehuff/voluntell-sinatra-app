@@ -1,6 +1,6 @@
 class OpportunitiesController < ApplicationController
 
-  # GET: /opportunities
+  # GET: /opportunities      this works
   get "/opportunities" do
     if logged_in?
       @opportunities = Opportunity.all
@@ -10,7 +10,7 @@ class OpportunitiesController < ApplicationController
     end
   end
 
-  # GET: /opportunities/new
+  # GET: /opportunities/new      this works
   get "/opportunities/new" do
     if logged_in?
       erb :"/opportunities/new"
@@ -19,7 +19,7 @@ class OpportunitiesController < ApplicationController
     end
   end
 
-  # POST: /opportunities
+  # POST: /opportunities     this works
   post "/opportunities" do
     if !params.value?("")
       @opportunity = Opportunity.new(params)
@@ -30,7 +30,7 @@ class OpportunitiesController < ApplicationController
     end
   end
 
-  # GET: /opportunities/5
+  # GET: /opportunities/5  ok, this works
   get "/opportunities/:id" do
     if logged_in?
       @opportunity = Opportunity.find_by_id(params[:id])
@@ -40,7 +40,7 @@ class OpportunitiesController < ApplicationController
     end
   end
 
-  # GET: /opportunities/5/edit
+  # GET: /opportunities/5/edit   this seems to work too
   get "/opportunities/:id/edit" do
     @opportunity = Opportunity.find_by_id(params[:id])
     if @opportunity && @opportunity.volunteer == current_user
@@ -50,9 +50,9 @@ class OpportunitiesController < ApplicationController
     end
   end
 
-  # PATCH: /opportunities/5
-  patch "/opportunities/:id" do
-    if !params.value?("")
+  # PATCH: /opportunities/5     *******fixed! :)
+  post "/opportunities/:id" do
+    if !params[:event].empty? && !params[:date].empty?
       @opportunity = Opportunity.find_by_id(params[:id])
       @opportunity.update(event: params[:event], date: params[:date], time: params[:time], description: params[:description])
       redirect '/opportunities'
@@ -61,7 +61,7 @@ class OpportunitiesController < ApplicationController
     end
   end
 
-  # DELETE: /opportunities/5/delete
+  # DELETE: /opportunities/5/delete        *******this is where the issue is
   get "/opportunities/:id/delete" do
     @opportunity = Opportunity.find_by_id(params[:id])
     if @opportunity && @opportunity.volunteer == current_user
