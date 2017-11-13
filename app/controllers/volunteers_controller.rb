@@ -51,26 +51,26 @@ class VolunteersController < ApplicationController
     end
 
 
-  # GET: /volunteers
+  # GET: /volunteers       works
   get "/volunteers" do
     @volunteers = Volunteer.all
     erb :"/volunteers/index"
   end
 
-  # GET: /volunteers/5
+  # GET: /volunteers/5      works
   get "/volunteers/:id" do
     @volunteer = Volunteer.find(params[:id])
     erb :"/volunteers/show"
   end
 
-  # GET: /volunteers/5/edit
+  # GET: /volunteers/5/edit         works but need to do form**
   get "/volunteers/:id/edit" do
     @volunteer = Volunteer.find(params[:id])
     erb :"/volunteers/edit"
   end
 
   # PATCH: /volunteers/5
-  patch "/volunteers/:id" do
+  post "/volunteers/:id" do
     if !params.value.empty?
       @volunteer = Volunteer.find_by_id(params[:id])
       @volunteer.update(params)
@@ -80,10 +80,4 @@ class VolunteersController < ApplicationController
     end
   end
 
-  # DELETE: /volunteers/5/delete
-  delete "/volunteers/:id/delete" do
-    @volunteer = Volunteer.find_by_id(params[:id])
-    @volunteer.delete
-    redirect "/volunteers"
-  end
 end

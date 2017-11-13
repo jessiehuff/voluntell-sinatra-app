@@ -3,7 +3,6 @@
 <%@success_stories.each do |story|%>
   <h4><a href="/volunteers/<%=story.volunteer.id%>"><%=story.volunteer.username%></a></h4>
   <p><a href="/success_stories/<%=story.id%>"><%=story.content%></a></p>
-  <p><%=story.author%></p><br>
 <% end %>
 <h2><a href="/success_stories/new">Make a new Story</a></h2>
 <br>
