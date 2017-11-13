@@ -10,6 +10,16 @@ class OpportunitiesController < ApplicationController
     end
   end
 
+  get '/search' do   #trying this search feature
+    @opportunities = Opportunity.all
+    if params[:search]
+      @opportunities = Opportunity.search(params[:search])
+    else
+      @opportunities = Opportunity.all
+    end
+    erb :'/results'
+  end
+
   # GET: /opportunities/new      this works
   get "/opportunities/new" do
     if logged_in?
