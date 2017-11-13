@@ -54,7 +54,7 @@ class OpportunitiesController < ApplicationController
   post "/opportunities/:id" do
     if !params[:event].empty? && !params[:date].empty?
       @opportunity = Opportunity.find_by_id(params[:id])
-      @opportunity.update(event: params[:event], date: params[:date], time: params[:time], description: params[:description])
+      @opportunity.update(event: params[:event], date: params[:date], time: params[:time], description: params[:description], cause: params[:cause])
       redirect '/opportunities'
     else
       redirect "/opportunities/#{params[:id]}"
