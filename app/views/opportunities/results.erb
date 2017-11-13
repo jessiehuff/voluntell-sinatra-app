@@ -1,0 +1,11 @@
+<% if @opportunities.present? %>
+<table>
+  <td> Cause </td><td>Opportunity</td>
+  <% @opportunities.each do |opportunity| %>
+  <tr><td><a href="/opportunities/<%=opportunity.id %>"><%=h opportunity.event %></td>
+    <td><%=h product.company.name %></td>
+  <% end %>
+  <% else %>
+  <p> There are no opportunities containing the term(s) <%= params[:search] %>.</p>
+  <% end %>
+</table>
