@@ -61,14 +61,18 @@ class OpportunitiesController < ApplicationController
     end
   end
 
-  # DELETE: /opportunities/5/delete        *******this is where the issue is
+  # DELETE: /opportunities/5/delete        fixed?
   get "/opportunities/:id/delete" do
-    @opportunity = Opportunity.find_by_id(params[:id])
-    if @opportunity && @opportunity.volunteer == current_user
-      @opportunity.delete
-      redirect "/opportunities"
+    if logged_in?
+      @opportunity = Opportunity.find_by_id(params[:id])
+      if @opportunity && (@opportunity.volunteer == current_user)
+        @opportunity.delete
+        redirect "/opportunities"
+      else
+        redirect "opportunities/#{@opportunity.id}"
+      end
     else
-      redirect '/opportunities'
+      redirect '/login'
     end
   end
 end
