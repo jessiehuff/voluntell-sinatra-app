@@ -17,7 +17,7 @@ class OpportunitiesController < ApplicationController
     else
       @opportunities = Opportunity.all
     end
-    erb :'/results'
+    erb :'/opportunities/results'
   end
 
   # GET: /opportunities/new      this works
