@@ -1,0 +1,14 @@
+<h1>Welcome, <%=current_user.username%></h1>
+<br><br>
+<%@opportunities.each do |opportunity|%>
+  <h4><a href="/volunteers/<%=opportunity.volunteer.id%>"><%=opportunity.volunteer.username%></a></h4>
+  <p><a href="/opportunities/<%=opportunity.id%>"><%=opportunity.event%></a> <%= opportunity.date%></p>
+  <p><%=opportunity.description%></p><br>
+<% end %>
+<h3><a href="/opportunities/new">Make a new Opportunity</a></h3>
+<br>
+<h3><a href="/success_stories">Check out everyone's volunteering stories!</a></h3>
+<br><br>
+
+
+<a href='/logout'>Log Out</a>
