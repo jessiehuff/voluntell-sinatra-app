@@ -1,6 +1,6 @@
 class SuccessStoriesController < ApplicationController
 
-# GET: /success_stories
+# GET: /success_stories         this works
 get "/success_stories" do
   if logged_in?
     @success_stories = SuccessStory.all
@@ -10,7 +10,7 @@ get "/success_stories" do
   end
 end
 
-# GET: /success_stories/new
+# GET: /success_stories/new      this works
 get "/success_stories/new" do
   if logged_in?
     erb :"/success_stories/new"
@@ -19,7 +19,7 @@ get "/success_stories/new" do
   end
 end
 
-# POST: /success_stories
+# POST: /success_stories         this works
 post "/success_stories" do
   if !params.value?("")
     @success_story = SuccessStory.new(params)
@@ -30,7 +30,7 @@ post "/success_stories" do
   end
 end
 
-# GET: /success_stories/5
+# GET: /success_stories/5        this works
 get "/success_stories/:id" do
   if logged_in?
     @success_story = SuccessStory.find_by_id(params[:id])
@@ -40,7 +40,7 @@ get "/success_stories/:id" do
   end
 end
 
-# GET: /success_stories/5/edit
+# GET: /success_stories/5/edit          works
 get "/success_stories/:id/edit" do
   @success_story = SuccessStory.find_by_id(params[:id])
   if @success_story && @success_story.volunteer == current_user
@@ -50,10 +50,10 @@ get "/success_stories/:id/edit" do
   end
 end
 
-# PATCH: /success_stories/5
-patch "/success_stories/:id" do
-  if !params.value?("")
-    @success_story = Opportunity.find_by_id(params[:id])
+# PATCH: /success_stories/5       got this to work! Woo!
+post "/success_stories/:id" do
+  if !params[:content].empty?
+    @success_story = SuccessStory.find_by_id(params[:id])
     @success_story.update(author: params[:author], content: params[:content])
     redirect "/success_stories/#{params[:id]}"
   else
