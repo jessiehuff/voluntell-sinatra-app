@@ -1,0 +1,7 @@
+<h1>Opportunity #<%=@opportunity.id%></h1>
+<p><%=@opportunity.description%></p>
+<a href="/opportunities/<%=@opportunity.id%>/edit">Edit Opportunity</a>
+<br><br><br>
+<form action="/opportunities/<%=@opportunity.id%>/delete" method="get">
+  <input type="submit" id="submit" value="Delete Opportunity"
+</form>
