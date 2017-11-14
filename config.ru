@@ -5,7 +5,6 @@ if ActiveRecord::Migrator.needs_migration?
 end
 
 run ApplicationController
-use CausesController
 use SuccessStoriesController
 use OpportunitiesController
 use VolunteersController

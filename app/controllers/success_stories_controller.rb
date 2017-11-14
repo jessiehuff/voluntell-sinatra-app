@@ -54,7 +54,7 @@ end
 post "/success_stories/:id" do
   if !params[:content].empty?
     @success_story = SuccessStory.find_by_id(params[:id])
-    @success_story.update(author: params[:author], content: params[:content])
+    @success_story.update(author: params[:author],title: params[:title], content: params[:content])
     redirect "/success_stories/#{params[:id]}"
   else
     redirect "/success_stories/#{params[:id]}/edit"
