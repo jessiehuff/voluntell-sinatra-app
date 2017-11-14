@@ -9,3 +9,8 @@
       <li><%=opportunity.description%></li>
     </ul>
 <% end %>
+<br><br>
+  <h4><%@volunteer.success_stories.each do |story|%>
+    <p><%=story.title%></p>
+    <p><%=story.content%></p>
+    <% end %>
