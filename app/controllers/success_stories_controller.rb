@@ -1,5 +1,8 @@
-class SuccessStoriesController < ApplicationController
+require 'sinatra/base'
+require 'rack-flash'
 
+class SuccessStoriesController < ApplicationController
+use Rack::Flash
 # GET: /success_stories         this works
 get "/success_stories" do
   if logged_in?
@@ -24,6 +27,7 @@ post "/success_stories" do
   if !params.value?("")
     @success_story = SuccessStory.new(params)
     current_user.success_stories << @success_story
+    flash[:message] = "Successfully created a story."
     redirect "/success_stories"
   else
     redirect '/success_stories/new'
@@ -55,8 +59,10 @@ post "/success_stories/:id" do
   if !params[:content].empty?
     @success_story = SuccessStory.find_by_id(params[:id])
     @success_story.update(author: params[:author],title: params[:title], content: params[:content])
+    flash[:message] = "Successfully updated your story."
     redirect "/success_stories/#{params[:id]}"
   else
+    flash[:message] = "You can't edit that story."
     redirect "/success_stories/#{params[:id]}/edit"
   end
 end
@@ -67,6 +73,7 @@ get "/success_stories/:id/delete" do
     @success_story = SuccessStory.find_by_id(params[:id])
     if @success_story && (@success_story.volunteer == current_user)
       @success_story.delete
+      flash[:message] = "Successfully deleted your story."
       redirect "/success_stories"
     else
       redirect "/success_stories/#{@success_story.id}"

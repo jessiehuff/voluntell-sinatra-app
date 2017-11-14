@@ -1,3 +1,7 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
 <h1>Tell Your Story!</h1>
 <br>
 <form action="/success_stories" method="post">
