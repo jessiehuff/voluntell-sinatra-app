@@ -10,7 +10,7 @@
     </ul>
 <% end %>
 <br><br>
-  <h4><%@volunteer.success_stories.each do |story|%>
-    <p><%=story.title%></p>
+  <%@volunteer.success_stories.each do |story|%>
+    <h4><%=story.title%></h4>
     <p><%=story.content%></p>
     <% end %>

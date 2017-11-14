@@ -2,7 +2,7 @@
 <h2>Welcome, <%=current_user.username%></h2>
 <br><br>
 <%@volunteers.each do |volunteer|%>
-  <h3><a href="/volunteers/<%=volunteer.slug%>"><%=volunteer.username%></a></h3>
+  <h3><a href="/volunteers/<%=volunteer.id%>"><%=volunteer.username%></a></h3>
 <% end %>
 <br><br>
 <a href='/logout'>Log Out</a>
