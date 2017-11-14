@@ -1,5 +1,8 @@
-class OpportunitiesController < ApplicationController
+require 'sinatra/base'
+require 'rack-flash'
 
+class OpportunitiesController < ApplicationController
+use Rack::Flash
   # GET: /opportunities      this works
   get "/opportunities" do
     if logged_in?
@@ -34,6 +37,7 @@ class OpportunitiesController < ApplicationController
     if !params.value?("")
       @opportunity = Opportunity.new(params)
       current_user.opportunities << @opportunity
+      flash[:message] = "You've created a new opportunity!"
       redirect "/opportunities"
     else
       redirect '/opportunities/new'
@@ -65,8 +69,10 @@ class OpportunitiesController < ApplicationController
     if !params[:event].empty? && !params[:date].empty?
       @opportunity = Opportunity.find_by_id(params[:id])
       @opportunity.update(event: params[:event], date: params[:date], time: params[:time], description: params[:description], cause: params[:cause])
+      flash[:message] = "You've successfully edited your opportunity."
       redirect '/opportunities'
     else
+      flash[:message] = "You can't edit this opportunity."
       redirect "/opportunities/#{params[:id]}"
     end
   end
@@ -77,8 +83,10 @@ class OpportunitiesController < ApplicationController
       @opportunity = Opportunity.find_by_id(params[:id])
       if @opportunity && (@opportunity.volunteer == current_user)
         @opportunity.delete
+        flash[:message] = "You've successfully deleted your opportunity."
         redirect "/opportunities"
       else
+        flash[:message] = "You can't delete this opportunity."
         redirect "opportunities/#{@opportunity.id}"
       end
     else
