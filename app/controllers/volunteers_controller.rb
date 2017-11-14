@@ -1,8 +1,4 @@
-require 'sinatra/base'
-require 'rack-flash'
-
 class VolunteersController < ApplicationController
-use Rack::Flash
     #sign up
     get '/signup' do
       if logged_in?
@@ -13,13 +9,22 @@ use Rack::Flash
     end
 
     post '/signup' do
-      if !params.value?("")
-      @volunteer = Volunteer.create(params)
-      if @volunteer
-        session[:volunteer_id] = @volunteer.id
-        flash[:message] = "You've successfully created an account!"
-        redirect '/opportunities'
-      end
+      if params.value?("")
+        flash[:message] = "Please fill out all of the fields."
+        redirect '/signup'
+      elsif !valid_email?(params)
+        flash[:message] = "Please enter a valid email."
+        redirect '/signup'
+      elsif username_taken?(params)
+        flash[:message] = "Username is taken. Please try something else."
+        redirect '/signup'
+      elsif !params.value?("")
+        @volunteer = Volunteer.create(params)
+        if @volunteer
+          session[:volunteer_id] = @volunteer.id
+          flash[:message] = "You've successfully created an account!"
+          redirect '/opportunities'
+        end
       else
         redirect '/signup'
       end
@@ -86,5 +91,15 @@ use Rack::Flash
       redirect "/volunteers/:id"
     end
   end
+
+helpers do
+  def username_taken?(params)
+    Volunteer.all.detect {|volunteer| params[:username] == volunteer.username}
+  end
+
+  def valid_email?(params)
+    params[:email] =~ /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
+  end
+end
 
 end

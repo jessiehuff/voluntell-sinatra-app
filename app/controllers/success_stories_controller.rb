@@ -1,8 +1,4 @@
-require 'sinatra/base'
-require 'rack-flash'
-
 class SuccessStoriesController < ApplicationController
-use Rack::Flash
 # GET: /success_stories         this works
 get "/success_stories" do
   if logged_in?
