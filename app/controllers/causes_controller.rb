@@ -1,8 +1,9 @@
 class CausesController < ApplicationController
 
-  # GET: /causes      *allow to view all causes
+  # GET: /causes      *allow to view all causes, create a new cause when opportunity is created though?
   get "/causes" do
     if logged_in?
+      @opportunities = Opportunity.all
       @causes = Cause.all
       erb :"/causes/index.html"
     else

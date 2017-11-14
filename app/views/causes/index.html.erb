@@ -1,7 +1,7 @@
 <h1>Welcome, <%=current_user.username%></h1>
 <br><br>
-<%@causes.each do |cause|%>
-  <p><a href="/causes/<%=cause.id%>"><%=cause.name%></a></p>
+<%@opportunities.each do |opportunity|%>
+  <p><a href="/causes/<%=cause.id%>"><%=opportunity.cause%></a></p>
 <% end %>
 <h3><a href="/opportunities/new">Make a new Opportunity</a></h3>
 <br>
