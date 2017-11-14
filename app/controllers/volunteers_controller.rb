@@ -74,7 +74,7 @@ class VolunteersController < ApplicationController
       if !params[:password].empty? && !params[:email].empty?
       @volunteer = Volunteer.find_by_id(params[:id])
       @volunteer.update(email: params[:email], password: params[:password])
-      redirect '/opportunities/index'
+      redirect '/opportunities'
     else
       redirect "/volunteers/:id"
     end
