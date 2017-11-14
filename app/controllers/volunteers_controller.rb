@@ -71,9 +71,9 @@ class VolunteersController < ApplicationController
 
   # PATCH: /volunteers/5
   post "/volunteers/:id" do
-    if !params.value.empty?
+      if !params[:password].empty? && !params[:email].empty?
       @volunteer = Volunteer.find_by_id(params[:id])
-      @volunteer.update(params)
+      @volunteer.update(email: params[:email], password: params[:password])
       redirect '/opportunities/index'
     else
       redirect "/volunteers/:id"
