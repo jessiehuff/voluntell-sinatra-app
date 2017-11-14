@@ -1,1 +1,8 @@
-<h1>Insert the form to edit an instance of your model here.</h1>
+<h1>Edit your profile</h1>
+<form action="/volunteers/<%=@volunteer.id%>" method="post">
+  <label for="email">Email:</label>
+  <input type="text" name="email" id="email" value="<%=@volunteer.email%>">
+  <br>
+  <label for ="password">Password:</label>
+  <input type="text" name="password" id="password" value="<%=@volunteer.password%>">
+  <input type="submit" id="submit" value="submit">
