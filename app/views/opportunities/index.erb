@@ -1,5 +1,5 @@
 <h1>Welcome, <%=current_user.username%></h1>
-<h4><a href="">Your page</a></h4> #need right url
+<h4><a href="/volunteers/<%=current_user.id%>">Your page</a></h4>
 <br><br>
 <h3>Interested in a specific cause? Search by cause here:</h3>
 <form action="search", method="get">
