@@ -1,3 +1,7 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
 <h1><%=@volunteer.username%>'s Opportunities</h1>
 
 <%@volunteer.opportunities.each do |opportunity|%>

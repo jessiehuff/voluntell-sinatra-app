@@ -1,5 +1,9 @@
+require 'sinatra/base'
+require 'rack-flash'
+
 class VolunteersController < ApplicationController
-  #sign up
+use Rack::Flash
+    #sign up
     get '/signup' do
       if logged_in?
         redirect '/opportunities'
@@ -13,6 +17,7 @@ class VolunteersController < ApplicationController
       @volunteer = Volunteer.create(params)
       if @volunteer
         session[:volunteer_id] = @volunteer.id
+        flash[:message] = "You've created an account!"
         redirect '/opportunities'
       end
       else
@@ -33,6 +38,7 @@ class VolunteersController < ApplicationController
       volunteer = Volunteer.find_by(username: params[:username])
       if volunteer && volunteer.authenticate(params[:password])
         session[:volunteer_id] = volunteer.id
+        flash[:message] = "You've successfully logged in."
         redirect '/opportunities'
       else
         redirect '/login'
