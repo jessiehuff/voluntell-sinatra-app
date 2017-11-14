@@ -17,7 +17,7 @@ use Rack::Flash
       @volunteer = Volunteer.create(params)
       if @volunteer
         session[:volunteer_id] = @volunteer.id
-        flash[:message] = "You've created an account!"
+        flash[:message] = "You've successfully created an account!"
         redirect '/opportunities'
       end
       else
@@ -80,6 +80,7 @@ use Rack::Flash
       if !params[:password].empty? && !params[:email].empty?
       @volunteer = Volunteer.find_by_id(params[:id])
       @volunteer.update(email: params[:email], password: params[:password])
+      flash[:message] = "You've edited your profile."
       redirect '/opportunities'
     else
       redirect "/volunteers/:id"
