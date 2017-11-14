@@ -13,12 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20171113185715) do
 
-  create_table "causes", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "opportunities", force: :cascade do |t|
     t.string   "event"
     t.string   "date"
@@ -28,11 +22,6 @@ ActiveRecord::Schema.define(version: 20171113185715) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.string   "cause"
-  end
-
-  create_table "opportunity_causes", force: :cascade do |t|
-    t.integer "opportunity_id"
-    t.integer "cause_id"
   end
 
   create_table "success_stories", force: :cascade do |t|
