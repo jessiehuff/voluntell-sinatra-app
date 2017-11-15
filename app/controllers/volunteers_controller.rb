@@ -1,4 +1,5 @@
 class VolunteersController < ApplicationController
+
     #sign up
     get '/signup' do
       if logged_in?
@@ -10,9 +11,10 @@ class VolunteersController < ApplicationController
 
     post '/signup' do
       if params.value?("")
-        flash[:message] = "Please fill out all of the fields."
+        flash[:message] = "Please fill out all fields."
         redirect '/signup'
-      elsif !valid_email?(params)
+      end
+      if !valid_email?(params)
         flash[:message] = "Please enter a valid email."
         redirect '/signup'
       elsif username_taken?(params)
