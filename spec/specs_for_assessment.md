@@ -9,8 +9,8 @@ Specs:
 - [x] Ensure that users can't modify content created by other users- only the owner of an opportunity or story can edit or delete it
 - [x] Ensure that the belongs_to resource has routes for Creating, Reading, Updating and Destroying- opportunities and success_stories can be created, read, updated, and destroyed
 - [x] Include user input validations- makes sure inputs aren't empty, requires specific fields
-- [ ] Display validation failures to user with error message (example form URL e.g. /posts/new)
-- [ ] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
+- [x] Display validation failures to user with error message (example form URL e.g. /posts/new)- flash messages that let you know if your username is already taken, that you successfully created, edited, or destroyed an opportunity or story
+- [x] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
 
 Confirm
 - [x] You have a large number of small Git commits
