@@ -21,7 +21,7 @@ class VolunteersController < ApplicationController
         flash[:message] = "Username is taken. Please try something else."
         redirect '/signup'
       elsif !params.value?("")
-        @volunteer = Volunteer.create(params)
+        @volunteer = Volunteer.create(username: params[:username], email: params[:email], password: params[:password])
         if @volunteer
           session[:volunteer_id] = @volunteer.id
           flash[:message] = "You've successfully created an account!"
