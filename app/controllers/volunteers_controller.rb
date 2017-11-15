@@ -56,6 +56,7 @@ class VolunteersController < ApplicationController
       if !logged_in?
         redirect '/'
       else
+        flash[:message] = "You've successfully logged out."
         session.clear
         redirect '/login'
       end

@@ -31,10 +31,10 @@ class OpportunitiesController < ApplicationController
   # POST: /opportunities     this works
   post "/opportunities" do
     if !params.value?("")
-      @opportunity = Opportunity.new(params)
+      @opportunity = Opportunity.new(event: params[:event], date: params[:date], time: params[:time], description: params[:description], cause: params[:cause])
       current_user.opportunities << @opportunity
       flash[:message] = "You've created a new opportunity!"
-      redirect "/opportunities"
+      redirect '/opportunities'
     else
       redirect '/opportunities/new'
     end

@@ -21,7 +21,7 @@ end
 # POST: /success_stories         this works
 post "/success_stories" do
   if !params.value?("")
-    @success_story = SuccessStory.new(params)
+    @success_story = SuccessStory.new(author: params[:author],title: params[:title], content: params[:content])
     current_user.success_stories << @success_story
     flash[:message] = "Successfully created a story."
     redirect "/success_stories"
