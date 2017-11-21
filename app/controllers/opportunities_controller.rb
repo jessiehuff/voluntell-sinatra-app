@@ -1,5 +1,5 @@
 class OpportunitiesController < ApplicationController
-  # GET: /opportunities      this works
+  # GET: /opportunities
   get "/opportunities" do
     if logged_in?
       @opportunities = Opportunity.all
@@ -9,7 +9,7 @@ class OpportunitiesController < ApplicationController
     end
   end
 
-  get '/search' do   #trying this search feature
+  get '/search' do
     @opportunities = Opportunity.all
     if params[:search]
       @opportunities = Opportunity.search(params[:search])
@@ -19,7 +19,7 @@ class OpportunitiesController < ApplicationController
     erb :'/opportunities/results'
   end
 
-  # GET: /opportunities/new      this works
+  # GET: /opportunities/new
   get "/opportunities/new" do
     if logged_in?
       erb :"/opportunities/new"
@@ -28,7 +28,7 @@ class OpportunitiesController < ApplicationController
     end
   end
 
-  # POST: /opportunities     this works
+  # POST: /opportunities
   post "/opportunities" do
     if !params.value?("")
       @opportunity = Opportunity.new(event: params[:event], date: params[:date], time: params[:time], description: params[:description], cause: params[:cause])
@@ -40,7 +40,7 @@ class OpportunitiesController < ApplicationController
     end
   end
 
-  # GET: /opportunities/5  ok, this works
+  # GET: /opportunities/5
   get "/opportunities/:id" do
     if logged_in?
       @opportunity = Opportunity.find_by_id(params[:id])
@@ -50,7 +50,7 @@ class OpportunitiesController < ApplicationController
     end
   end
 
-  # GET: /opportunities/5/edit   this seems to work too
+  # GET: /opportunities/5/edit
   get "/opportunities/:id/edit" do
     @opportunity = Opportunity.find_by_id(params[:id])
     if logged_in?
@@ -65,7 +65,7 @@ class OpportunitiesController < ApplicationController
     end
   end
 
-  # PATCH: /opportunities/5     *******fixed! :)
+  # PATCH: /opportunities/5
   post "/opportunities/:id" do
     if !params[:event].empty? && !params[:date].empty?
       @opportunity = Opportunity.find_by_id(params[:id])
@@ -78,7 +78,7 @@ class OpportunitiesController < ApplicationController
     end
   end
 
-  # DELETE: /opportunities/5/delete        fixed!
+  # DELETE: /opportunities/5/delete
   get "/opportunities/:id/delete" do
     if logged_in?
       @opportunity = Opportunity.find_by_id(params[:id])

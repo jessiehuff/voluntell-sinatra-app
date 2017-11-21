@@ -1,5 +1,5 @@
 class SuccessStoriesController < ApplicationController
-# GET: /success_stories         this works
+# GET: /success_stories
 get "/success_stories" do
   if logged_in?
     @success_stories = SuccessStory.all
@@ -9,7 +9,7 @@ get "/success_stories" do
   end
 end
 
-# GET: /success_stories/new      this works
+# GET: /success_stories/new
 get "/success_stories/new" do
   if logged_in?
     erb :"/success_stories/new"
@@ -18,7 +18,7 @@ get "/success_stories/new" do
   end
 end
 
-# POST: /success_stories         this works
+# POST: /success_stories
 post "/success_stories" do
   if !params.value?("")
     @success_story = SuccessStory.new(author: params[:author],title: params[:title], content: params[:content])
@@ -30,7 +30,7 @@ post "/success_stories" do
   end
 end
 
-# GET: /success_stories/5        this works
+# GET: /success_stories/5
 get "/success_stories/:id" do
   if logged_in?
     @success_story = SuccessStory.find_by_id(params[:id])
@@ -40,7 +40,7 @@ get "/success_stories/:id" do
   end
 end
 
-# GET: /success_stories/5/edit          works
+# GET: /success_stories/5/edit
 get "/success_stories/:id/edit" do
   @success_story = SuccessStory.find_by_id(params[:id])
   if logged_in?
@@ -55,7 +55,7 @@ get "/success_stories/:id/edit" do
   end
 end
 
-# PATCH: /success_stories/5       got this to work! Woo!
+# PATCH: /success_stories/5
 post "/success_stories/:id" do
   if !params[:content].empty?
     @success_story = SuccessStory.find_by_id(params[:id])
