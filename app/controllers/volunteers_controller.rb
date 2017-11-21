@@ -65,22 +65,31 @@ class VolunteersController < ApplicationController
     end
 
 
-  # GET: /volunteers       works
+  # GET: /volunteers
   get "/volunteers" do
     @volunteers = Volunteer.all
     erb :"/volunteers/index"
   end
 
-  # GET: /volunteers/5      works
+  # GET: /volunteers/5
   get "/volunteers/:slug" do
     @volunteer = Volunteer.find(params[:slug])
     erb :"/volunteers/show"
   end
 
-  # GET: /volunteers/5/edit         works but need to do form**
+  # GET: /volunteers/5/edit
   get "/volunteers/:slug/edit" do
     @volunteer = Volunteer.find(params[:slug])
-    erb :"/volunteers/edit"
+    if logged_in?
+      if @volunteer == current_user
+        erb :"/volunteers/edit"
+      else
+        flash[:message] = "You can't edit this information."
+        redirect "/opportunities"
+      end
+    else
+      redirect '/login'
+    end
   end
 
   # PATCH: /volunteers/5
