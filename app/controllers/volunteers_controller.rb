@@ -45,7 +45,6 @@ class VolunteersController < ApplicationController
       volunteer = Volunteer.find_by(username: params[:username])
       if volunteer && volunteer.authenticate(params[:password])
         session[:volunteer_id] = volunteer.id
-        flash[:message] = "You've successfully logged in."
         redirect '/opportunities'
       else
         redirect '/login'
@@ -58,7 +57,6 @@ class VolunteersController < ApplicationController
       if !logged_in?
         redirect '/'
       else
-        flash[:message] = "You've successfully logged out."
         session.clear
         redirect '/login'
       end
