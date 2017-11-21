@@ -72,26 +72,26 @@ class VolunteersController < ApplicationController
   end
 
   # GET: /volunteers/5      works
-  get "/volunteers/:id" do
-    @volunteer = Volunteer.find(params[:id])
+  get "/volunteers/:slug" do
+    @volunteer = Volunteer.find(params[:slug])
     erb :"/volunteers/show"
   end
 
   # GET: /volunteers/5/edit         works but need to do form**
-  get "/volunteers/:id/edit" do
-    @volunteer = Volunteer.find(params[:id])
+  get "/volunteers/:slug/edit" do
+    @volunteer = Volunteer.find(params[:slug])
     erb :"/volunteers/edit"
   end
 
   # PATCH: /volunteers/5
-  post "/volunteers/:id" do
+  post "/volunteers/:slug" do
       if !params[:password].empty? && !params[:email].empty?
-      @volunteer = Volunteer.find_by_id(params[:id])
+      @volunteer = Volunteer.find_by_id(params[:slug])
       @volunteer.update(email: params[:email], password: params[:password])
       flash[:message] = "You've edited your profile."
       redirect '/opportunities'
     else
-      redirect "/volunteers/:id"
+      redirect "/volunteers/:slug"
     end
   end
 
