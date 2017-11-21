@@ -53,8 +53,13 @@ class OpportunitiesController < ApplicationController
   # GET: /opportunities/5/edit   this seems to work too
   get "/opportunities/:id/edit" do
     @opportunity = Opportunity.find_by_id(params[:id])
-    if @opportunity && @opportunity.volunteer == current_user
-      erb :"/opportunities/edit"
+    if logged_in?
+      if @opportunity && @opportunity.volunteer == current_user
+        erb :"/opportunities/edit"
+      else
+        flash[:message] = "You can't edit this opportunity."
+        redirect "opportunities/#{@opportunity.id}"
+      end
     else
       redirect '/login'
     end

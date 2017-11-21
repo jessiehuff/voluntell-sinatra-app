@@ -43,8 +43,13 @@ end
 # GET: /success_stories/5/edit          works
 get "/success_stories/:id/edit" do
   @success_story = SuccessStory.find_by_id(params[:id])
-  if @success_story && @success_story.volunteer == current_user
-    erb :"/success_stories/edit"
+  if logged_in?
+    if @success_story && @success_story.volunteer == current_user
+      erb :"/success_stories/edit"
+    else
+      flash[:message] = "You can't edit this story."
+      redirect "/success_stories/#{@success_story.id}"
+    end
   else
     redirect '/login'
   end
@@ -72,6 +77,7 @@ get "/success_stories/:id/delete" do
       flash[:message] = "Successfully deleted your story."
       redirect "/success_stories"
     else
+      flash[:message] = "You can't delete this story."
       redirect "/success_stories/#{@success_story.id}"
     end
   else
