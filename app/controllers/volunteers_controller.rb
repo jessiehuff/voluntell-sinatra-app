@@ -47,6 +47,11 @@ class VolunteersController < ApplicationController
         session[:volunteer_id] = volunteer.id
         redirect '/opportunities'
       else
+        if params.value?("")
+          flash[:message] = "Please fill out all fields."
+        else
+          flash[:message] = "An error has occurred. Please check for typos."
+        end
         redirect '/login'
       end
     end
