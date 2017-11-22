@@ -14,25 +14,28 @@ class VolunteersController < ApplicationController
         flash[:message] = "Please fill out all fields."
         redirect '/signup'
       end
-      if !valid_email?(params)
+
+      if !valid_email?
         flash[:message] = "Please enter a valid email."
         redirect '/signup'
-      elsif username_taken?(params)
+      end
+
+      if Volunteer.find_by(username: params[:username])
         flash[:message] = "Username is taken. Please try something else."
         redirect '/signup'
-      elsif !params.value?("")
-        @volunteer = Volunteer.create(username: params[:username], email: params[:email], password: params[:password])
-        if @volunteer
-          session[:volunteer_id] = @volunteer.id
-          flash[:message] = "You've successfully created an account!"
-          redirect '/opportunities'
-        end
+      end
+
+      @volunteer = Volunteer.new(username: params[:username], email: params[:email], password: params[:password])
+      if @volunteer.save
+        session[:volunteer_id] = @volunteer.id
+        flash[:message] = "You've successfully created an account!"
+        redirect '/opportunities'
       else
         redirect '/signup'
       end
     end
 
-  #Log in
+   #Log in
     get '/login' do
       if logged_in?
         redirect '/opportunities'
@@ -95,8 +98,9 @@ class VolunteersController < ApplicationController
     end
   end
 
+
   # PATCH: /volunteers/5
-  post "/volunteers/:slug" do
+  put "/volunteers/:slug" do
       if !params[:password].empty? && !params[:email].empty?
       @volunteer = Volunteer.find_by_id(params[:slug])
       @volunteer.update(email: params[:email], password: params[:password])
@@ -108,11 +112,8 @@ class VolunteersController < ApplicationController
   end
 
 helpers do
-  def username_taken?(params)
-    Volunteer.all.detect {|volunteer| params[:username] == volunteer.username}
-  end
 
-  def valid_email?(params)
+  def valid_email?
     params[:email] =~ /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
   end
 end

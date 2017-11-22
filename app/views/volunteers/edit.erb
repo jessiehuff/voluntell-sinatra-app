@@ -4,6 +4,8 @@
 
 <h1>Edit your profile</h1>
 <form action="/volunteers/<%=@volunteer.id%>" method="post">
+  <input type="hidden" name="_method" value="PUT" />
+  <input type="number" name="volunteer_id" value="2" />
   <label for="email">Email:</label>
   <input type="text" name="email" id="email" value="<%=@volunteer.email%>">
   <br>

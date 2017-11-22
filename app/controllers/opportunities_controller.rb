@@ -30,6 +30,7 @@ class OpportunitiesController < ApplicationController
 
   # POST: /opportunities
   post "/opportunities" do
+    binding.pry
     if !params.value?("")
       @opportunity = Opportunity.new(event: params[:event], date: params[:date], time: params[:time], description: params[:description], cause: params[:cause])
       current_user.opportunities << @opportunity
@@ -80,18 +81,15 @@ class OpportunitiesController < ApplicationController
 
   # DELETE: /opportunities/5/delete
   get "/opportunities/:id/delete" do
-    if logged_in?
-      @opportunity = Opportunity.find_by_id(params[:id])
-      if @opportunity && (@opportunity.volunteer == current_user)
-        @opportunity.delete
-        flash[:message] = "You've successfully deleted your opportunity."
-        redirect "/opportunities"
-      else
-        flash[:message] = "You can't delete this opportunity."
-        redirect "opportunities/#{@opportunity.id}"
-      end
+    authenticate_user
+    @opportunity = Opportunity.find_by_id(params[:id])
+    if @opportunity && (@opportunity.volunteer == current_user)
+      @opportunity.delete
+      flash[:message] = "You've successfully deleted your opportunity."
+      redirect "/opportunities"
     else
-      redirect '/login'
+      flash[:message] = "You can't delete this opportunity."
+      redirect "opportunities/#{@opportunity.id}"
     end
   end
 end
