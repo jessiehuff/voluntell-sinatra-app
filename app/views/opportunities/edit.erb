@@ -3,7 +3,8 @@
 <% end %>
 
 <h1>Edit Opportunity</h1>
-<form action="/opportunities/<%=@opportunity.id%>" method="post">
+<form action="/opportunities/<%=@opportunity.id%>" method="POST">
+  <input id="hidden" type="hidden" name="_method" value="patch">
   <label for="event">Name:</label>
   <input type="text" name="event" id="event" value="<%=@opportunity.event%>">
   <br>

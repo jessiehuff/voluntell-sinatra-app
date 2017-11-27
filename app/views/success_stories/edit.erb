@@ -5,6 +5,7 @@
 <h1>Edit Story</h1>
 <br><br>
 <form action="/success_stories/<%=@success_story.id%>" method="post">
+<input id="hidden" type="hidden" name="_method" value="patch">
   <label for="title">Title:</label>
   <input type="text" name="title" id="title" value="<%=@success_story.title%>">
   <br><br>

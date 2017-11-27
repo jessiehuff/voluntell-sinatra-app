@@ -10,8 +10,9 @@
 <p><%=@opportunity.cause%></p>
 <a href="/opportunities/<%=@opportunity.id%>/edit">Edit Opportunity</a>
 <br><br><br>
-<form action="/opportunities/<%=@opportunity.id%>/delete" method="get">
+<form action="/opportunities/<%=@opportunity.id%>/delete" method="POST">
   <input type="submit" id="submit" value="Delete Opportunity">
+  <input type="hidden" name="_method" value="delete" />
 </form>
 <br><br>
 <h4><a href="/opportunities">Back to all opportunities</a></h4>
