@@ -24,5 +24,12 @@ class ApplicationController < Sinatra::Base
     def current_user
       Volunteer.find(session[:volunteer_id])
     end
-  end
+
+    def authenticate_user
+      if !logged_in?
+        flash[:message] = "Please log in."
+        redirect '/login'
+      end
+    end
+end
 end

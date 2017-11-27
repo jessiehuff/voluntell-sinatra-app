@@ -8,8 +8,9 @@
 <p><%=@success_story.author%></p>
 <a href="/success_stories/<%=@success_story.id%>/edit">Edit Story</a>
 <br><br><br>
-<form action="/success_stories/<%=@success_story.id%>/delete" method="get">
+<form action="/success_stories/<%=@success_story.id%>/delete" method="post">
   <input type="submit" id="submit" value="Delete Story">
+  <input type="hidden" name="_method" value="delete" />
 </form>
 <br><br>
 <h4><a href="/opportunities">Back to all opportunities</a></h4>

@@ -5,8 +5,8 @@ if ActiveRecord::Migrator.needs_migration?
 end
 
 use Rack::MethodOverride
-run ApplicationController
 
-use SuccessStoriesController
-use OpportunitiesController
 use VolunteersController
+use OpportunitiesController
+use SuccessStoriesController
+run ApplicationController
