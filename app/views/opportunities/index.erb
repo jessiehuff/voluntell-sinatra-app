@@ -11,12 +11,14 @@
 <input type="submit" id="submit" value="submit">
 </form>
 <br><br>
-<h3>All opportunities:</h3>
+<div className="opportunities">
+<h2>All opportunities:</h2>
 <%@opportunities.each do |opportunity|%>
-  <h4><a href="/volunteers/<%=opportunity.volunteer_id%>"><%=opportunity.volunteer.username%></a></h4>
-  <p><a href="/opportunities/<%=opportunity.id%>"><%=opportunity.event%></a> <%= opportunity.date%></p>
-  <p><%=opportunity.description%></p><br>
+  <h3><a href="/volunteers/<%=opportunity.volunteer_id%>"><%=opportunity.volunteer.username%></a></h3>
+  <h4><a href="/opportunities/<%=opportunity.id%>"><%=opportunity.event%></a> <%= opportunity.date%></h4>
+  <h4><%=opportunity.description%></h4><br>
 <% end %>
+</div>
 <br>
 
 
